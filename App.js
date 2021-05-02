@@ -6,6 +6,7 @@ import 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/HomeScreen';
 import Camera from './src/Camera';
+import ContactScreen from './src/ContactScreen'
 import TempView from './src/TempView';
 import CallLogView from './src/CallLogView';
 
@@ -17,11 +18,13 @@ const App = () => {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Camera" component={Camera} />
+        <Stack.Screen name="Contacts" component={ContactScreen} />
         <Stack.Screen
           name="Logs"
           component={CallLogView}
           initialParams={['a', 'b']}
         />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

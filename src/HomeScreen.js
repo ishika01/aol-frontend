@@ -137,6 +137,12 @@ export default function HomeScreen({navigation}) {
               title="Audio"
               onPress={() => setSelectedFormat('AUDIO')}
             />
+            {/* add contact button*/ }
+            <Button
+              style={styles.button}
+              title="Contacts"
+              onPress={()=>navigation.navigate("Contacts")}
+            />
           </View>
         </View>
         <Section title="User">
