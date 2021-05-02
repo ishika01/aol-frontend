@@ -7,6 +7,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/HomeScreen';
 import Camera from './src/Camera';
 import TempView from './src/TempView';
+import CallLogView from './src/CallLogView';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,11 @@ const App = () => {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Camera" component={Camera} />
+        <Stack.Screen
+          name="Logs"
+          component={CallLogView}
+          initialParams={['a', 'b']}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

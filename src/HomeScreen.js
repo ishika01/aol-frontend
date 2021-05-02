@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Button,
   Image,
+  PermissionsAndroid,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -15,11 +16,21 @@ import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import Section from './Section';
 import SectionRaw from './SectionRaw';
 
+import CallLogs from 'react-native-call-log';
+import RecordAudio from './RecordAudio';
+
+const filter = {
+  phoneNumbers: '9273651956',
+  // minTimestamp: 1554443524241,
+  // maxTimestamp: 1556354485386,
+};
+
 export default function HomeScreen({navigation}) {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [selectedFormat, setSelectedFormat] = useState('');
   const [singleFile, setSingleFile] = useState('');
+  const [callLogs, setCallLogs] = useState([]);
 
   const selectOneFile = async () => {
     //Opening Document Picker for selection of one file
@@ -53,6 +64,32 @@ export default function HomeScreen({navigation}) {
       }
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
+          {
+            title: 'Call Log Example',
+            message: 'Access your call logs',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          CallLogs.load(-1, filter)
+            .then(c => setCallLogs(c))
+            .catch(err => console.log(err));
+        } else {
+          console.log('Call Log permission denied');
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
 
   return (
     <SafeAreaView>
@@ -89,6 +126,16 @@ export default function HomeScreen({navigation}) {
               style={styles.button}
               title="Attachment"
               onPress={() => setSelectedFormat('FILE')}
+            />
+            <Button
+              style={styles.button}
+              title="Logs"
+              onPress={() => navigation.navigate('Logs', {callLogs: callLogs})}
+            />
+            <Button
+              style={styles.button}
+              title="Audio"
+              onPress={() => setSelectedFormat('AUDIO')}
             />
           </View>
         </View>
@@ -143,6 +190,9 @@ export default function HomeScreen({navigation}) {
                 </ScrollView>
               </View>
             )}
+
+            {/* Audio Record */}
+            {question && selectedFormat === 'AUDIO' && <RecordAudio />}
           </Text>
         </View>
       </ScrollView>

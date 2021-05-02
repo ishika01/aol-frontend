@@ -20,7 +20,7 @@ export default function Camera(props) {
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
 
   const takePicture = async function (camera) {
-    const options = {quality: 0.5, base64: true};
+    const options = {quality: 1, base64: true};
     const data = await camera.takePictureAsync(options);
     //  eslint-disable-next-line
     console.log(data.uri);
