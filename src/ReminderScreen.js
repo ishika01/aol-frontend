@@ -7,6 +7,10 @@ const ReminderScreen = function(){
     return (
         <View>
             <Text>this rem screen</Text>
+            <DatePicker
+                date={date}
+                onDateChange={setDate}
+            />
         </View>
     )
 }
@@ -15,7 +19,3 @@ const styles = StyleSheet.create({
 })
 
 export default ReminderScreen 
-/*<DatePicker
-    date={date}
-    onDateChange={setDate}
-  />*/

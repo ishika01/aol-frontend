@@ -13,7 +13,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.rt2zz.reactnativecontacts.ReactNativeContacts; // <--- import
-
+import com.henninghall.date_picker.DatePickerPackage;
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -32,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new CallLogPackage());
           return packages;
         }
+       
 
         @Override
         protected String getJSMainModuleName() {
