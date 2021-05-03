@@ -13,13 +13,28 @@ import {
 } from 'react-native';
 
 import Contacts from 'react-native-contacts';
+
 const ContactScreen = function(){
 
-  Contacts.getAll().then(contacts => {
-    // contacts returned
-    console.log("hello==========================================")
-    console.log(contacts.length)
-  })
+  let [con, setContacts] = useState([]);
+    PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+      {
+        'title': 'Contacts',
+        'message': 'This app would like to view your contacts.',
+        'buttonPositive': 'Please accept bare mortal'
+      }
+    )
+    Contacts.getAll().then(contacts => {
+      // contacts returned
+      console.log("heyyyyyy===================")
+      contacts.map((item)=>{
+        console.log(item.displayName)
+        
+      })
+      //setContacts([...con,contacts])
+    })
+    
     return(
         <View style={style.container}>
             <Text>
