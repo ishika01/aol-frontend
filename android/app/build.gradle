@@ -204,7 +204,9 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     implementation project(':react-native-call-log')
-
+    //contacts
+    implementation project(':react-native-contacts')
+    //================
     implementation project(':react-native-camera')
         implementation fileTree(dir: "libs", include: ["*.jar"])
     // implementation 'com.android.support:appcompat-v7:26.0.1'
