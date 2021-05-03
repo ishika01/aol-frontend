@@ -21,9 +21,7 @@ const ContactScreen = function(){
       index:0
     }
   ];
-
-  let [con, setContacts] = useState(initialValue);
-  //console.log("after usestate")
+  const [con, setContacts] = useState(initialValue);
   useEffect(async ()=>{
     PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
@@ -35,23 +33,24 @@ const ContactScreen = function(){
     )
     Contacts.getAll().then(contacts => {
       // contacts returned
-      console.log("heyyyyyy===================")
       contacts.map((item,index)=>{
-        //console.log(item.displayName)
+        //displaying from contacts db
+        console.log(item.displayName+"====== "+index)
         //current name from contacts
         let nobj={name:item.displayName,index:index}
-        //console.log(nobj)
+        console.log(nobj)
         let arr=con.push(nobj)
         //console.log(arr)
-        setContacts(con => ([...con, nobj]));
+        setContacts([...con,nobj]);
         console.log(con.length);
         //console.log(con);
-        console.log("=================================================");
+        
       })
     })
   },[])
   //issue ==>> displays 1
-  console.log(con.length);
+  console.log("=================================================");
+  //console.log(con);
  
     return(
         <View style={style.container}>
@@ -59,7 +58,20 @@ const ContactScreen = function(){
                 this is contact screen
             </Text>
             <Text>{con.length}</Text>
-            
+            <FlatList
+              data={con}
+              keyExtractor={(item)=>item.index}
+              renderItem={({item})=>{
+    
+                   return(
+                    <View>
+                        <Text>{item.name}</Text>
+                    </View>
+                   )
+               }}
+            />
+
+
         </View>
     )
 }
