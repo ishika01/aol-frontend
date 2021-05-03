@@ -15,10 +15,16 @@ import {
 import Contacts from 'react-native-contacts';
 
 const ContactScreen = function(){
+  const initialValue = [
+    {
+      name:"",
+      index:0
+    }
+  ];
 
-  let [con, setContacts] = useState([]);
+  let [con, setContacts] = useState(initialValue);
   //console.log("after usestate")
-  useEffect(()=>{
+  useEffect(async ()=>{
     PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
       {
@@ -30,19 +36,30 @@ const ContactScreen = function(){
     Contacts.getAll().then(contacts => {
       // contacts returned
       console.log("heyyyyyy===================")
-      contacts.map((item)=>{
+      contacts.map((item,index)=>{
         //console.log(item.displayName)
-        setContacts([...con,item.displayName])
+        //current name from contacts
+        let nobj={name:item.displayName,index:index}
+        //console.log(nobj)
+        let arr=con.push(nobj)
+        //console.log(arr)
+        setContacts(con => ([...con, nobj]));
+        console.log(con.length);
+        //console.log(con);
+        console.log("=================================================");
       })
-      
     })
   },[])
-  console.log(con)
+  //issue ==>> displays 1
+  console.log(con.length);
+ 
     return(
         <View style={style.container}>
             <Text>
                 this is contact screen
             </Text>
+            <Text>{con.length}</Text>
+            
         </View>
     )
 }
