@@ -143,6 +143,12 @@ export default function HomeScreen({navigation}) {
               title="Contacts"
               onPress={()=>navigation.navigate("Contacts")}
             />
+            {/* add reminder button*/ }
+            <Button
+              style={styles.button_Reminder}
+              title="Reminders"
+              onPress={()=>navigation.navigate("Reminders")}
+            />
           </View>
         </View>
         <Section title="User">
@@ -255,4 +261,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDDDD',
     padding: 5,
   },
+  button_Reminder:{
+    
+  }
 });
