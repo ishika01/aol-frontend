@@ -33,19 +33,10 @@ const ContactScreen = function(){
     )
     Contacts.getAll().then(contacts => {
       // contacts returned
-      contacts.map((item,index)=>{
-        //displaying from contacts db
-        console.log(item.displayName+"====== "+index)
-        //current name from contacts
-        let nobj={name:item.displayName,index:index}
-        console.log(nobj)
-        let arr=con.push(nobj)
-        //console.log(arr)
-        setContacts([...con,nobj]);
-        console.log(con.length);
-        //console.log(con);
-        
-      })
+     const modififiedContacts = contacts.map((item,index)=>{
+         return {name:item.displayName,index:index}
+      });
+     setContacts(modififiedContacts);
     })
   },[])
   //issue ==>> displays 1
@@ -65,7 +56,7 @@ const ContactScreen = function(){
     
                    return(
                     <View>
-                        <Text>{item.name}</Text>
+                        <Text>{item.name}={item.index}</Text>
                     </View>
                    )
                }}
