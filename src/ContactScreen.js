@@ -17,6 +17,8 @@ import Contacts from 'react-native-contacts';
 const ContactScreen = function(){
 
   let [con, setContacts] = useState([]);
+  //console.log("after usestate")
+  useEffect(()=>{
     PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
       {
@@ -29,12 +31,13 @@ const ContactScreen = function(){
       // contacts returned
       console.log("heyyyyyy===================")
       contacts.map((item)=>{
-        console.log(item.displayName)
-        
+        //console.log(item.displayName)
+        setContacts([...con,item.displayName])
       })
-      //setContacts([...con,contacts])
+      
     })
-    
+  },[])
+  console.log(con)
     return(
         <View style={style.container}>
             <Text>
