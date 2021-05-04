@@ -45,9 +45,26 @@ const Rem = function (props) {
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
     };
+    //date time formatter
 
+    const FormatDate = (data) => {
+        let dateTimeString =
+            data.getDate() +
+            '-' +
+            (data.getMonth() + 1) +
+            '-' +
+            data.getFullYear() +
+            ' ' +
+            data.getHours() +
+            ':' +
+            data.getMinutes();
+        return dateTimeString;
+    };
+
+    //
     const handleConfirm = async (date) => {
-        const d = date.toString()
+        const d = FormatDate(date);
+        console.log(d);
         if (b1 === true) {
             try {
                 //console.warn('A date has been picked: ', d);

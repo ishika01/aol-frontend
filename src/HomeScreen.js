@@ -162,7 +162,8 @@ export default function HomeScreen({ navigation }) {
               onPress={() => navigation.navigate("Contacts")}
             />
             {/* hide reminder button by checking if async storage has any dates or not*/}
-            {reminderVisibility ?
+            {/*change true with reminder visibility */}
+            {true ?
               <Button
                 style={styles.button_Reminder}
                 title="Reminders"
