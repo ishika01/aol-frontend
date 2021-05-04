@@ -24,6 +24,7 @@
     "react-native-contacts": "^7.0.0",
     "react-native-date-picker": "^3.2.10",
     "react-native-datetimepicker-modal": "^1.0.1",
+    "react-native-datepicker": "^1.7.2",
     "react-native-document-picker": "^5.0.3",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-modal-datetime-picker": "^9.2.1",
