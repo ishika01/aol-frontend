@@ -1,12 +1,11 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Rem from './component/Rem';
 
 const ReminderScreen = function () {
   return (
     <View>
       <Rem title="reminder 1" />
-      <Rem title="reminder 2" />
     </View>
   );
 };

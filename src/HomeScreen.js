@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Image,
@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import Section from './Section';
 import SectionRaw from './SectionRaw';
@@ -27,7 +27,7 @@ const filter = {
   // maxTimestamp: 1556354485386,
 };
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({ navigation }) {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [selectedFormat, setSelectedFormat] = useState('');
@@ -35,19 +35,10 @@ export default function HomeScreen({navigation}) {
   const [callLogs, setCallLogs] = useState([]);
 
   //================ Async code get item ==========================
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('date');
-      if (value !== null) {
-        // value previously stored
-        console.log(value);
-      }
-    } catch (e) {
-      // error reading value
-    }
-  };
+
   //=======================================================
   const selectOneFile = async () => {
+
     //Opening Document Picker for selection of one file
     try {
       const res = await DocumentPicker.pick({
@@ -145,7 +136,7 @@ export default function HomeScreen({navigation}) {
             <Button
               style={styles.button}
               title="Logs"
-              onPress={() => navigation.navigate('Logs', {callLogs: callLogs})}
+              onPress={() => navigation.navigate('Logs', { callLogs: callLogs })}
             />
             <Button
               style={styles.button}
@@ -156,13 +147,13 @@ export default function HomeScreen({navigation}) {
             <Button
               style={styles.button}
               title="Contacts"
-              onPress={() => navigation.navigate('Contacts')}
+              onPress={() => navigation.navigate("Contacts")}
             />
             {/* add reminder button*/}
             <Button
-              style={styles.button}
+              style={styles.button_Reminder}
               title="Reminders"
-              onPress={() => navigation.navigate('Reminders')}
+              onPress={() => navigation.navigate("Reminders")}
             />
           </View>
         </View>
@@ -190,7 +181,7 @@ export default function HomeScreen({navigation}) {
                   style={styles.buttonStyle}
                   onPress={selectOneFile}>
                   {/*Single file selection button*/}
-                  <Text style={{marginRight: 10, fontSize: 19}}>
+                  <Text style={{ marginRight: 10, fontSize: 19 }}>
                     pick one file
                   </Text>
                   <Image
@@ -277,5 +268,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDDDD',
     padding: 5,
   },
-  button_Reminder: {},
+  button_Reminder: {
+
+  }
 });

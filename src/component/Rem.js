@@ -1,84 +1,127 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {useEffect, useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import React, { useState, useEffect } from 'react'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Rem = function (props) {
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [cdate, setDate] = useState('');
-  const [prevdate, setprevdate] = useState('');
-  //================================
-  useEffect(() => {
-    try {
-      const value = AsyncStorage.getItem('date');
-      if (value !== null) {
-        // value previously stored
-        setprevdate(value);
-      }
-    } catch (e) {
-      // error reading value
-    }
-  }, []);
-  //================================
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
+    //const [dateswitch ,setDateSwitch]=useState(true)
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    //button state
+    const [b1, setBl] = useState(false);
+    const [b2, setB2] = useState(false);
+    //date state
+    const [b1date, setb1Date] = useState('');
+    const [b2date, setb2Date] = useState('');
+    //store date
+    const [sb1date, setsb1Date] = useState('');
+    const [sb2date, setsb2Date] = useState('');
+    //============== showDatePicker ==================
 
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
+    //get item from storage
+    const gettime = async () => {
+        try {
+            const value1 = await AsyncStorage.getItem('b1');
+            if (value1 !== null) {
+                // value previously stored
+                setb1Date(value1);
+            }
+            const value2 = await AsyncStorage.getItem('b2');
+            if (value2 !== null) {
+                // value previously stored
+                setb2Date(value2);
+            }
+        } catch (e) {
+            // error reading value
+        }
+    };
+    gettime();
+    const b1showDatePicker = () => {
+        setBl(true);
+        setDatePickerVisibility(true);
+    };
+    const b2showDatePicker = () => {
+        setB2(true);
+        setDatePickerVisibility(true);
+    };
 
-  const handleConfirm = async date => {
-    try {
-      const d = date.toString();
-      console.warn('A date has been picked: ', d);
-      await AsyncStorage.setItem('date', d);
-      setDate(d);
-      hideDatePicker();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
 
-  //console.log(cdate)
-  //console.log("=========================================")
-  return (
-    <View style={styles.container}>
-      <Button
-        title={props.title}
-        style={styles.button}
-        onPress={showDatePicker}
-      />
-      {/* <TouchableOpacity onPress={showDatePicker}>
-        <Text style={styles.button}>{props.title}</Text>
-        <Text style={styles.button}>{prevdate}</Text>
-      </TouchableOpacity> */}
-      <Text style={styles.text}>{cdate}</Text>
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-      />
-    </View>
-  );
-};
+    const handleConfirm = async (date) => {
+        const d = date.toString()
+        if (b1 === true) {
+            try {
+                //console.warn('A date has been picked: ', d);
+                await AsyncStorage.setItem('b1', d);
+                setb1Date(d);
+                setBl(false);
+                hideDatePicker();
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            try {
+                //console.warn('A date has been picked: ', d);
+                await AsyncStorage.setItem('b2', d);
+                setb2Date(d);
+                setB2(false);
+                hideDatePicker();
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    };
+
+
+
+    return (
+        <View >
+            <View style={styles.button_container}>
+                <TouchableOpacity onPress={b1showDatePicker}>
+                    <Text style={styles.button}>reminder 1 </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={b2showDatePicker}>
+                    <Text style={styles.button}>reminder 2</Text>
+                </TouchableOpacity>
+            </View>
+            <Text style={styles.text}>{b1date}</Text>
+            <Text style={styles.text}>{b2date}</Text>
+            <DateTimePickerModal
+                is24Hour={true}
+                isVisible={isDatePickerVisible}
+                mode="datetime"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+            />
+        </View>
+    );
+
+}
 const styles = StyleSheet.create({
-  text: {fontSize: 24},
-  button: {
-    fontSize: 18,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderRadius: 4,
-    //alignSelf: 'flex-start',
-    marginHorizontal: '1%',
-    marginBottom: 6,
-    backgroundColor: '#3483eb',
-    width: 150,
-    height: 40,
-    color: 'white',
-    textAlign: 'center',
-  },
-});
+    button_container: {
+        flexDirection: 'row',
+        borderColor: 'black',
+        borderWidth: 2,
+        justifyContent: 'space-between',
+    },
+    text: { fontSize: 24 },
+    button: {
+        fontSize: 18,
+        paddingHorizontal: 8,
+        paddingVertical: 6,
+        borderRadius: 4,
+        //alignSelf: 'flex-start',
+        marginHorizontal: '1%',
+        marginBottom: 6,
+        backgroundColor: '#3483eb',
+        width: 150,
+        height: 40,
+        color: 'white',
+        textAlign: 'center',
+    },
+
+})
 
 export default Rem;
+
