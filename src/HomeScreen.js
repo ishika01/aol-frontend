@@ -33,9 +33,21 @@ export default function HomeScreen({ navigation }) {
   const [selectedFormat, setSelectedFormat] = useState('');
   const [singleFile, setSingleFile] = useState('');
   const [callLogs, setCallLogs] = useState([]);
+  const [reminderVisibility, setreminderVisibility] = useState(false);
 
   //================ Async code get item ==========================
-
+  const gettime = async () => {
+    try {
+      const value = await AsyncStorage.getAllKeys();
+      if (value == null) {
+        // hide button reminder
+        setreminderVisibility(true);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+  gettime();
   //=======================================================
   const selectOneFile = async () => {
 
@@ -149,12 +161,13 @@ export default function HomeScreen({ navigation }) {
               title="Contacts"
               onPress={() => navigation.navigate("Contacts")}
             />
-            {/* add reminder button*/}
-            <Button
-              style={styles.button_Reminder}
-              title="Reminders"
-              onPress={() => navigation.navigate("Reminders")}
-            />
+            {/* hide reminder button by checking if async storage has any dates or not*/}
+            {reminderVisibility ?
+              <Button
+                style={styles.button_Reminder}
+                title="Reminders"
+                onPress={() => navigation.navigate("Reminders")}
+              /> : null}
           </View>
         </View>
         <Section title="User">

@@ -12,9 +12,7 @@ const Rem = function (props) {
     //date state
     const [b1date, setb1Date] = useState('');
     const [b2date, setb2Date] = useState('');
-    //store date
-    const [sb1date, setsb1Date] = useState('');
-    const [sb2date, setsb2Date] = useState('');
+
     //============== showDatePicker ==================
 
     //get item from storage
