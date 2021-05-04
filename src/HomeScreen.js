@@ -15,7 +15,9 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import Section from './Section';
 import SectionRaw from './SectionRaw';
-
+//
+import AsyncStorage from '@react-native-async-storage/async-storage';
+//
 import CallLogs from 'react-native-call-log';
 import RecordAudio from './RecordAudio';
 
@@ -32,6 +34,19 @@ export default function HomeScreen({navigation}) {
   const [singleFile, setSingleFile] = useState('');
   const [callLogs, setCallLogs] = useState([]);
 
+  //================ Async code get item ==========================
+  const getData = async () => {
+    try {
+        const value = await AsyncStorage.getItem('date')
+        if(value !== null) {
+        // value previously stored
+        console.log(value)
+        }
+    } catch(e) {
+        // error reading value
+    }
+}
+//=======================================================
   const selectOneFile = async () => {
     //Opening Document Picker for selection of one file
     try {
@@ -206,6 +221,7 @@ export default function HomeScreen({navigation}) {
             {/* Audio Record */}
             {question && selectedFormat === 'AUDIO' && <RecordAudio />}
           </Text>
+          <Text>async date</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
