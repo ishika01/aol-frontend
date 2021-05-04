@@ -37,16 +37,16 @@ export default function HomeScreen({navigation}) {
   //================ Async code get item ==========================
   const getData = async () => {
     try {
-        const value = await AsyncStorage.getItem('date')
-        if(value !== null) {
+      const value = await AsyncStorage.getItem('date');
+      if (value !== null) {
         // value previously stored
-        console.log(value)
-        }
-    } catch(e) {
-        // error reading value
+        console.log(value);
+      }
+    } catch (e) {
+      // error reading value
     }
-}
-//=======================================================
+  };
+  //=======================================================
   const selectOneFile = async () => {
     //Opening Document Picker for selection of one file
     try {
@@ -152,17 +152,17 @@ export default function HomeScreen({navigation}) {
               title="Audio"
               onPress={() => setSelectedFormat('AUDIO')}
             />
-            {/* add contact button*/ }
+            {/* add contact button*/}
             <Button
               style={styles.button}
               title="Contacts"
-              onPress={()=>navigation.navigate("Contacts")}
+              onPress={() => navigation.navigate('Contacts')}
             />
-            {/* add reminder button*/ }
+            {/* add reminder button*/}
             <Button
-              style={styles.button_Reminder}
+              style={styles.button}
               title="Reminders"
-              onPress={()=>navigation.navigate("Reminders")}
+              onPress={() => navigation.navigate('Reminders')}
             />
           </View>
         </View>
@@ -277,7 +277,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDDDD',
     padding: 5,
   },
-  button_Reminder:{
-    
-  }
+  button_Reminder: {},
 });
