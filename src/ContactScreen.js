@@ -12,7 +12,7 @@ import {
   StatusBar
 } from 'react-native';
 import Contacts from 'react-native-contacts';
-
+import ListItemView from './component/ListItem'
 const ContactScreen = function () {
   const initialValue = [
     {
@@ -41,6 +41,12 @@ const ContactScreen = function () {
 
   return (
     <View style={style.container}>
+      {/**uncomment the below code if you dont want to use flatlist */}
+      {/**<ListItemView
+      data={con}
+      key={{item => item.index}}
+      display={{item.name}={item.index}}
+    /> */}
       <FlatList
         data={con}
         keyExtractor={item => item.index}
