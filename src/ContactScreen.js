@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Import all required component
 import {
@@ -9,9 +9,8 @@ import {
   Text,
   View,
   FlatList,
-  TextInput,
+  StatusBar
 } from 'react-native';
-
 import Contacts from 'react-native-contacts';
 
 const ContactScreen = function () {
@@ -31,26 +30,24 @@ const ContactScreen = function () {
     Contacts.getAll().then(contacts => {
       // contacts returned
       const modififiedContacts = contacts.map((item, index) => {
-        return {name: item.displayName, index: index};
+        return { name: item.displayName, index: index };
       });
       setContacts(modififiedContacts);
     });
   }, []);
   //issue ==>> displays 1
-  console.log('=================================================');
+  //console.log('=================================================');
   //console.log(con);
 
   return (
     <View style={style.container}>
-      <Text>this is contact screen</Text>
-      <Text>{con.length}</Text>
       <FlatList
         data={con}
         keyExtractor={item => item.index}
-        renderItem={({item}) => {
+        renderItem={({ item }) => {
           return (
-            <View>
-              <Text>
+            <View style={style.item}>
+              <Text style={style.title}>
                 {item.name}={item.index}
               </Text>
             </View>
@@ -64,8 +61,15 @@ const ContactScreen = function () {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
-    backgroundColor: '#ebebeb',
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 18,
   },
 });
 
