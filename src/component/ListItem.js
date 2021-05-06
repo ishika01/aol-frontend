@@ -1,24 +1,22 @@
 import React from 'react';
-import { StyleSheet, FlatList, Text, View } from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 
-const ListItemView = function (props) {
-    return (
-        <View>
-            <FlatList
-                data={props.data}
-                keyExtractor={props.key}
-                renderItem={({ item }) => {
-                    return (
-                        <View>
-                            <Text>
-                                {props.text}
-                            </Text>
-                        </View>
-                    );
-                }}
-            />
-        </View>
-    )
-}
+const ListItemView = function ({data}) {
+  return (
+    <View>
+      <FlatList
+        data={data}
+        keyExtractor={key => key.id}
+        renderItem={({item}) => {
+          return (
+            <View>
+              <Text>{item.title}</Text>
+            </View>
+          );
+        }}
+      />
+    </View>
+  );
+};
 
 export default ListItemView;
