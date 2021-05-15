@@ -10,15 +10,16 @@ import ContactScreen from './src/ContactScreen'
 import ReminderScreen from './src/ReminderScreen'
 import TempView from './src/TempView';
 import CallLogView from './src/CallLogView';
-import PhoneScreen from './src/phoneAuth/PhoneScreen';
-
+import LoginScreen from './src/Screens/auths/Login';
+import VerifyOTP from './src/Screens/auths/VerifyOTP';
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Phone">
-        <Stack.Screen name="Phone" component={PhoneScreen} />
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="VOTP" component={VerifyOTP} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Camera" component={Camera} />
         <Stack.Screen name="Contacts" component={ContactScreen} />
