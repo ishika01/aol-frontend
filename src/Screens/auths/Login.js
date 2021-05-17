@@ -7,7 +7,7 @@ const Login = ({ navigation }) => {
   //const [confirm, setConfirm] = useState(true);
   const [phoneNumber, addPhoneNumber] = useState('+91');
   const GetOTP = () => {
-    if (phoneNumber && phoneNumber.length > 12) {
+    if (phoneNumber && phoneNumber.length === 13) {
       navigation.navigate('VOTP', { phoneNumber });
     }
     else { alert("Please enter 10 digit phone number"); }
@@ -26,14 +26,13 @@ const Login = ({ navigation }) => {
       <TouchableOpacity
         style={style.btnContainer}
         onPress={() => {
-          console.log('works');
           console.log(phoneNumber);
           GetOTP();
         }}
       >
         <Text style={style.btnText}>submit </Text>
       </TouchableOpacity>
-    </View >
+    </View>
   );
 }
 
