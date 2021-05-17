@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { TextInput, View, TouchableOpacity, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
-
-const VerifyOTP = () => {
+import auth from '@react-native-firebase/auth';
+const VerifyOTP = ({ route: { params: { phoneNumber } }, navigation }) => {
     // If null, no SMS has been sent
     //const [confirm, setConfirm] = useState(true);
     const [otp, setOtp] = useState('');
