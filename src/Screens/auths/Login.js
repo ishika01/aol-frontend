@@ -33,7 +33,16 @@ const Login = ({ navigation }) => {
       >
         <Text style={style.btnText}>submit </Text>
       </TouchableOpacity>
-    </View >
+
+      <TouchableOpacity
+        style={style.btnContainer}
+        onPress={() => {
+          navigation.navigate('Signup');
+        }}
+      >
+        <Text style={style.btnText}>Signup </Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
