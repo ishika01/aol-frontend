@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, View, TouchableOpacity, Text } from 'react-native';
+import { TextInput, View, TouchableOpacity, Text, KeyboardAvoidingView } from 'react-native';
 import { StyleSheet } from 'react-native';
 
 const Login = ({ navigation }) => {
