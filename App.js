@@ -13,27 +13,31 @@ import CallLogView from './src/CallLogView';
 import LoginScreen from './src/Screens/auths/Login';
 import VerifyOTP from './src/Screens/auths/VerifyOTP';
 import SignupScreen from './src/Screens/auths/Signup';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="VOTP" component={VerifyOTP} />
-        <Stack.Screen name="Signup" component={SignupScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Camera" component={Camera} />
-        <Stack.Screen name="Contacts" component={ContactScreen} />
-        <Stack.Screen name="Reminders" component={ReminderScreen} />
-        <Stack.Screen
-          name="Logs"
-          component={CallLogView}
-          initialParams={['a', 'b']}
-        />
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="VOTP" component={VerifyOTP} />
+          <Stack.Screen name="Signup" component={SignupScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Camera" component={Camera} />
+          <Stack.Screen name="Contacts" component={ContactScreen} />
+          <Stack.Screen name="Reminders" component={ReminderScreen} />
+          <Stack.Screen
+            name="Logs"
+            component={CallLogView}
+            initialParams={['a', 'b']}
+          />
 
-      </Stack.Navigator>
-    </NavigationContainer>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 
