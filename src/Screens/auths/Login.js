@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Button, ThemeProvider, Input } from 'react-native-elements';
 import { TextInput } from 'react-native-paper';
+import connectionApi from '../../api/connection';
 
 
 const Login = ({ navigation }) => {
