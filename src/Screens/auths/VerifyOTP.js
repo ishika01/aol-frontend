@@ -13,20 +13,7 @@ const VerifyOTP = ({ route: { params: { phoneNumber } }, navigation }) => {
     useEffect(() => {
         signInWithPhoneNumber();
     }, []);
-    const PostData = async (response) => {
-        fetch("http://localhost:5000/signin", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                phone: response.user._user.phoneNumber
-            })
-        }).then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
-    }
+    
     async function signInWithPhoneNumber() {
         try {
             const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
