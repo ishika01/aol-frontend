@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextInput, View, TouchableOpacity, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import connectionApi from '../../api/connection';
 const VerifyOTP = ({ route: { params: { phoneNumber } }, navigation }) => {
     // If null, no SMS has been sent
     //const [confirm, setConfirm] = useState(true);
@@ -29,6 +30,17 @@ const VerifyOTP = ({ route: { params: { phoneNumber } }, navigation }) => {
             const response = await confirm.confirm(code);
             if (response) {
                 console.log(response);
+                //connection code===================================
+                const data = { phone: response.user._user.phoneNumber };
+                
+                console.log(JSON.stringify(data));
+                try {
+                    const resp = await connectionApi.post('/signup', { data });
+                    console.log(resp);
+                } catch (err) {
+                    console.log(err);
+                }
+                //===================================================
                 navigation.navigate('Home');
             }
         } catch (e) {
