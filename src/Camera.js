@@ -1,5 +1,5 @@
 'use strict';
-import React, {PureComponent, useState} from 'react';
+import React, {PureComponent, useState, useEffect} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 
@@ -16,14 +16,31 @@ const PendingView = () => (
 );
 
 export default function Camera(props) {
+  const [returnScreen,setreturnScreen]=useState('');
   const [cam, setCam] = useState(RNCamera.Constants.Type.back);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
+  const [client,setClient] = useState('');
 
+  const setScreen =()=>{
+    if(props.route.params.client==="Signup"){
+      return("Signup");
+    }
+  }
+  //console.log(returnScreen);
+  useEffect(()=>{
+    setreturnScreen(setScreen());
+  });
+  
   const takePicture = async function (camera) {
     const options = {quality: 1, base64: true};
     const data = await camera.takePictureAsync(options);
     //  eslint-disable-next-line
-    console.log(data.uri);
+    const uri = data.uri
+    console.log('============')
+    console.log(uri+'uri');
+    console.log('============')
+    props.navigation.navigate(returnScreen,{'data':data.uri});
+    
   };
 
   const toggleFlashlight = () => {

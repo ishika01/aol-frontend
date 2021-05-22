@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text, Input, Button, ThemeProvider } from 'react-native-elements';
 import Spacer from '../../component/Spacer';
 import connectionApi from '../../api/connection';
 import { TextInput, Card, RadioButton, Title } from 'react-native-paper';
-const SignupScreen = ({ navigation }) => {
+const SignupScreen = ({ navigation,route }) => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [teacherId, setTeacherId] = useState('');
     //const [teacher, setTeacher] = useState(false);
     const [checked, setChecked] = React.useState('second');
+    const [img,setImage] = useState('');
+    useEffect(()=>{
+        if(!route.params){
+            console.log('yes');
+        }else{
+            const img=setImage(route.params.data)
+        }
+    })
+    //console.log('Signup = ');
+    //console.log(img);
     //are you a teacher if yes 2 option
     //create a post method to send data 
     const Signup = async () => {
@@ -20,15 +30,17 @@ const SignupScreen = ({ navigation }) => {
             name: name,
             email_id: email,
             isTeacher: isTeacher,
+            profile_image:img,
+            teacher_id:teacherId,
         };
         console.log(JSON.stringify(data));
         try {
             const resp = await connectionApi.post('/signup',  data );
-            
             console.log(resp.data);
         } catch (err) {
             console.log(err);
         }
+        navigation.navigate('Login');
     }
     const radiostate = () => {
         if (checked === 'first') {
@@ -114,7 +126,7 @@ const SignupScreen = ({ navigation }) => {
                                     />
                                     <Button
                                 title="Upload photo"
-                                onPress={() => { console.log('upload photo') }}
+                                onPress={() => { navigation.navigate('Camera',{"client":"Signup"}); }}
                             />
                                 </View>
                                 : null}
