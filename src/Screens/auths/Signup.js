@@ -3,6 +3,7 @@ import { View, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keybo
 import { Text, Input, Button, ThemeProvider } from 'react-native-elements';
 import Spacer from '../../component/Spacer';
 import { TextInput } from 'react-native-paper';
+import connectionApi from '../../api/connection';
 const SignupScreen = ({ navigation }) => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -12,18 +13,7 @@ const SignupScreen = ({ navigation }) => {
     //are you a teacher if yes 2 option
     //create a post method to send data 
     const Signup = async () => {
-        fetch("http://localhost:5000/signup", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                phone: response.user._user.phoneNumber
-            })
-        }).then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
+        //const data = { phone: response.user._user.phoneNumber };
     }
     //else 
     return (

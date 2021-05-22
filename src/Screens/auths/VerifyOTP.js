@@ -33,7 +33,6 @@ const VerifyOTP = ({ route: { params: { phoneNumber } }, navigation }) => {
                 console.log(response);
                 //connection code===================================
                 const data = { phone: response.user._user.phoneNumber };
-
                 console.log(JSON.stringify(data));
                 console.log(connectionApi);
                 try {
