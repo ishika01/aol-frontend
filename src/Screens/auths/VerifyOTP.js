@@ -34,7 +34,6 @@ const VerifyOTP = ({ route: { params: { phoneNumber } }, navigation }) => {
                 //connection code===================================
                 const data = { phone: response.user._user.phoneNumber };
                 console.log(JSON.stringify(data));
-                console.log(connectionApi);
                 try {
                     const resp = await connectionApi.post('/signup',  data );
                     console.log(resp.data);
