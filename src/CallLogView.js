@@ -49,7 +49,22 @@ export default function CallLogView({route}) {
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
 
-          CallLogs.load(1).then(c => console.log(c));
+          CallLogs.load(2).then(c => {
+            console.log(c);
+            const modififiedLogs = c.map((item, index) => {
+              const isSelected=false;
+              const statecon='No';
+              return { 
+                name: item.name,
+                phoneNumber:item.phoneNumber,
+                duration:item.duration, 
+                index: index, 
+                isSelected:isSelected, 
+                statecon:statecon };
+            });
+            console.log(modififiedLogs);
+            setLogs(modififiedLogs);
+          });
         } else {
           console.log('Call Log permission denied');
         }
@@ -59,6 +74,7 @@ export default function CallLogView({route}) {
       }
     })()
   }, []);
+  console.log('log state ===>  ',logs);
   return (
     <View style={styles.container}>
       <Text>{callLogs && callLogs.length}</Text>
