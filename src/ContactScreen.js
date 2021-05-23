@@ -55,7 +55,6 @@ const ContactScreen = function () {
           return({...item});
         }
       }
-      console.log({...item})
       return({...item});
     })
     setContacts(arr);

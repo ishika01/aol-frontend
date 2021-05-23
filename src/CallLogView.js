@@ -1,6 +1,8 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import ListItemView from './component/ListItem';
+import CallLogs from 'react-native-call-log';
+import { PermissionsAndroid } from 'react-native';
 
 const DATA = [
   {
@@ -20,6 +22,43 @@ const DATA = [
 export default function CallLogView({route}) {
   const {params} = route;
   const {callLogs} = params;
+  const initialValue = [
+    {
+      index: 0,
+      name: '',
+      phoneNumber:'',
+      duration:0,
+      isSelected:false,
+      statecon:'NO'
+    },
+  ];
+  const [logs, setLogs] = useState(initialValue);
+  useEffect(() => {
+    (async () => {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
+          {
+            title: 'Call Log Example',
+            message:
+              'Access your call logs',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          }
+        )
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+
+          CallLogs.load(1).then(c => console.log(c));
+        } else {
+          console.log('Call Log permission denied');
+        }
+      }
+      catch (e) {
+        console.log(e);
+      }
+    })()
+  }, []);
   return (
     <View style={styles.container}>
       <Text>{callLogs && callLogs.length}</Text>
