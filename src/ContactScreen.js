@@ -20,7 +20,7 @@ const ContactScreen = function () {
       name: '',
       index: 0,
       isSelected:false,
-      statecon:'No'
+      statecon:'NO'
     },
   ];
   const [con, setContacts] = useState(initialValue);
@@ -45,7 +45,15 @@ const ContactScreen = function () {
   const selectionHandler = (i)=>{
     let arr=con.map((item)=>{
       if(item.index===i.index){
-        item.isSelected=true;
+        if(item.isSelected===false){
+          item.isSelected=true;
+          item.statecon='YES';
+          return({...item});
+        }else{
+          item.isSelected=true;
+          item.statecon='NO';
+          return({...item});
+        }
       }
       console.log({...item})
       return({...item});
@@ -76,7 +84,7 @@ const ContactScreen = function () {
               <Text style={style.title}>
                 {item.name}={item.index}
               </Text>
-              <Text style={style.title}>{item.isSelected}</Text>
+              <Text style={style.title}>{item.statecon}</Text>
             </TouchableOpacity>
           );
         }}
