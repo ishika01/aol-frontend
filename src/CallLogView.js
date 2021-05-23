@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet,StatusBar,FlatList,TouchableOpacity} from 'react-native';
 import ListItemView from './component/ListItem';
 import CallLogs from 'react-native-call-log';
 import { PermissionsAndroid } from 'react-native';
@@ -76,26 +76,61 @@ export default function CallLogView({route}) {
   }, []);
   console.log('log state ===>  ',logs);
   return (
-    <View style={styles.container}>
-      <Text>{callLogs && callLogs.length}</Text>
-      {/* {callLogs &&
-        callLogs.length > 0 &&
-        callLogs.map((log, i) => (
-          <View key={i}>
-            <Text>Hi</Text>
-          </View>
-        ))} */}
-      <View>
-        <ListItemView data={DATA} />
-      </View>
+    <View style={style.container}>
+      {/**uncomment the below code if you dont want to use flatlist */}
+      {/**<ListItemView
+      data={con}
+      key={{item => item.index}}
+      display={{item.name}={item.index}}
+    /> */}
+      <FlatList
+        data={logs}
+        keyExtractor={item => item.index}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity 
+            style={style.touchstyle}
+            onPress={()=>{
+              console.log('pressed');
+              }}
+            >
+              <Text style={style.title}>
+                {item.index}={item.phoneNumber}
+              </Text>
+              <Text style={style.title}>{item.statecon}</Text>
+            </TouchableOpacity>
+          );
+        }}
+      />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
+  touchstyle:{
+    marginTop:'5%',
+    marginLeft:'10%',
+    marginRight:'10%',
+    height:50,
+    width:'80%',
+    borderRadius:4,
+    backgroundColor:'green',
+    justifyContent:'space-between',
+    paddingHorizontal:25,
+    flexDirection:'row',
+    alignItems:'center',
+  },
   container: {
     flex: 1,
-    paddingTop: 40,
-    paddingHorizontal: 20,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    color:'white',
+    fontSize: 18,
   },
 });
