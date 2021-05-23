@@ -49,7 +49,8 @@ export default function CallLogView({route}) {
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
 
-          CallLogs.load(2).then(c => {
+          //change load()=>loadAll() for loading the entire call logs
+          CallLogs.load(10).then(c => {
             console.log(c);
             const modififiedLogs = c.map((item, index) => {
               const isSelected=false;
@@ -75,6 +76,24 @@ export default function CallLogView({route}) {
     })()
   }, []);
   console.log('log state ===>  ',logs);
+  const selectionLogHandler = (i)=>{
+    let arr=logs.map((item)=>{
+      if(item.index===i.index){
+        if(item.isSelected===false){
+          item.isSelected=true;
+          item.statecon='YES';
+          return({...item});
+        }else{
+          item.isSelected=true;
+          item.statecon='NO';
+          return({...item});
+        }
+      }
+      return({...item});
+    })
+    setLogs(arr);
+    //console.log('con=> ',con);
+  }
   return (
     <View style={style.container}>
       {/**uncomment the below code if you dont want to use flatlist */}
@@ -91,7 +110,7 @@ export default function CallLogView({route}) {
             <TouchableOpacity 
             style={style.touchstyle}
             onPress={()=>{
-              console.log('pressed');
+              selectionLogHandler(item);
               }}
             >
               <Text style={style.title}>
