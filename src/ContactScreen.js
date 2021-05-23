@@ -9,7 +9,8 @@ import {
   Text,
   View,
   FlatList,
-  StatusBar
+  StatusBar,
+  TouchableOpacity
 } from 'react-native';
 import Contacts from 'react-native-contacts';
 import ListItemView from './component/ListItem'
@@ -38,7 +39,9 @@ const ContactScreen = function () {
   //issue ==>> displays 1
   //console.log('=================================================');
   //console.log(con);
-
+  const selectionHandler = ()=>{
+    console.log('pressed');
+  }
   return (
     <View style={style.container}>
       {/**uncomment the below code if you dont want to use flatlist */}
@@ -52,11 +55,15 @@ const ContactScreen = function () {
         keyExtractor={item => item.index}
         renderItem={({ item }) => {
           return (
-            <View style={style.item}>
+            <TouchableOpacity 
+            style={style.touchstyle}
+            onPress={()=>{selectionHandler()}}
+            >
               <Text style={style.title}>
                 {item.name}={item.index}
               </Text>
-            </View>
+              <Text style={style.title}>{'Selected'}</Text>
+            </TouchableOpacity>
           );
         }}
       />
@@ -65,6 +72,19 @@ const ContactScreen = function () {
 };
 
 const style = StyleSheet.create({
+  touchstyle:{
+    marginTop:'5%',
+    marginLeft:'10%',
+    marginRight:'10%',
+    height:50,
+    width:'80%',
+    borderRadius:4,
+    backgroundColor:'green',
+    justifyContent:'space-between',
+    paddingHorizontal:25,
+    flexDirection:'row',
+    alignItems:'center',
+  },
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
@@ -75,6 +95,7 @@ const style = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
+    color:'white',
     fontSize: 18,
   },
 });

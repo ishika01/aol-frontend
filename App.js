@@ -22,9 +22,9 @@ const App = () => {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen name="Login" component={LoginScreen} />
+          {/*<Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="VOTP" component={VerifyOTP} />
-          <Stack.Screen name="Signup" component={SignupScreen} />
+          <Stack.Screen name="Signup" component={SignupScreen} />*/}
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Camera" component={Camera} />
           <Stack.Screen name="Contacts" component={ContactScreen} />
