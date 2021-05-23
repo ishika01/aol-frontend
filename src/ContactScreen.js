@@ -19,6 +19,8 @@ const ContactScreen = function () {
     {
       name: '',
       index: 0,
+      isSelected:false,
+      state:'No'
     },
   ];
   const [con, setContacts] = useState(initialValue);
@@ -31,16 +33,28 @@ const ContactScreen = function () {
     Contacts.getAll().then(contacts => {
       // contacts returned
       const modififiedContacts = contacts.map((item, index) => {
-        return { name: item.displayName, index: index };
+        const isSelected=false;
+        return { name: item.displayName, index: index, isSelected:isSelected };
       });
       setContacts(modififiedContacts);
     });
   }, []);
   //issue ==>> displays 1
   //console.log('=================================================');
-  //console.log(con);
-  const selectionHandler = ()=>{
-    console.log('pressed');
+  
+  const selectionHandler = (i)=>{
+    con.map((item)=>{
+      if(item.index===i.index){
+        if(i.isSelected===true){
+          console.log(con);
+          return(i.isSelected=false)
+        }else{
+          console.log(con);
+          return(i.isSelected=true);
+        }
+      }
+    })
+    
   }
   return (
     <View style={style.container}>
@@ -57,12 +71,14 @@ const ContactScreen = function () {
           return (
             <TouchableOpacity 
             style={style.touchstyle}
-            onPress={()=>{selectionHandler()}}
+            onPress={()=>{
+              selectionHandler(item);
+              }}
             >
               <Text style={style.title}>
                 {item.name}={item.index}
               </Text>
-              <Text style={style.title}>{'Selected'}</Text>
+              <Text style={style.title}>{item.isSelected}</Text>
             </TouchableOpacity>
           );
         }}
