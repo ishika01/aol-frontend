@@ -20,7 +20,7 @@ const ContactScreen = function () {
       name: '',
       index: 0,
       isSelected:false,
-      state:'No'
+      statecon:'No'
     },
   ];
   const [con, setContacts] = useState(initialValue);
@@ -34,28 +34,26 @@ const ContactScreen = function () {
       // contacts returned
       const modififiedContacts = contacts.map((item, index) => {
         const isSelected=false;
-        return { name: item.displayName, index: index, isSelected:isSelected };
+        const statecon='No';
+        return { name: item.displayName, index: index, isSelected:isSelected, statecon:statecon };
       });
       setContacts(modififiedContacts);
     });
   }, []);
   //issue ==>> displays 1
   //console.log('=================================================');
-  
   const selectionHandler = (i)=>{
-    con.map((item)=>{
+    let arr=con.map((item)=>{
       if(item.index===i.index){
-        if(i.isSelected===true){
-          console.log(con);
-          return(i.isSelected=false)
-        }else{
-          console.log(con);
-          return(i.isSelected=true);
-        }
+        item.isSelected=true;
       }
+      console.log({...item})
+      return({...item});
     })
-    
+    setContacts(arr);
+    //console.log('con=> ',con);
   }
+  
   return (
     <View style={style.container}>
       {/**uncomment the below code if you dont want to use flatlist */}
