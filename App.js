@@ -6,13 +6,15 @@ import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/HomeScreen';
 import Camera from './src/Camera';
-import ContactScreen from './src/ContactScreen'
-import ReminderScreen from './src/ReminderScreen'
+import ContactScreen from './src/ContactScreen';
+import ReminderScreen from './src/ReminderScreen';
 import TempView from './src/TempView';
 import CallLogView from './src/CallLogView';
 import LoginScreen from './src/Screens/auths/Login';
 import VerifyOTP from './src/Screens/auths/VerifyOTP';
 import SignupScreen from './src/Screens/auths/Signup';
+import CreateCourse from './src/CreateCourse';
+import Test from './src/Test';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createStackNavigator();
@@ -29,6 +31,8 @@ const App = () => {
           <Stack.Screen name="Camera" component={Camera} />
           <Stack.Screen name="Contacts" component={ContactScreen} />
           <Stack.Screen name="Reminders" component={ReminderScreen} />
+          <Stack.Screen name="CreateCrs" component={CreateCourse} />
+          <Stack.Screen name="Test" component={Test} />
           <Stack.Screen
             name="Logs"
             component={CallLogView}
