@@ -22,7 +22,7 @@ const CreateCourse = ()=>{
       transition={transition}
       style={styles.container}
     >
-      <StatusBar hidden />
+
       {data.map(({ bg, color, category, subCategories }, index) => {
         return (
           <TouchableOpacity

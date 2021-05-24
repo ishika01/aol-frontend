@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import {
   Text,
   View,
@@ -34,17 +34,12 @@ const CreateCourse = () => {
   const [C_Id, setC_Id] = useState('');
   const [C_Add, setC_Add] = useState('');
 
-  const [currentIndex, setCurrentIndex] = React.useState(null);
-  const ref = React.useRef();
 
+  const [currentIndex, setCurrentIndex] = useState(null);
+  const ref = useRef();
+  //========================================================
   console.log(fabstate);
-  const fab = () => {
-    return (
-      <View>
-        <Text>hello</Text>
-      </View>
-    );
-  };
+
   const submitcourse = () => {
     const ind = course.length;
     console.log('ind == > ', ind);
@@ -57,13 +52,20 @@ const CreateCourse = () => {
     };
     setCourse([...course, arr]);
   };
+  //========================================================
   console.log(course);
   return (
     <View  style={{ borderWidth: 2, borderColor: 'black', flex: 10 }}>
       {/*add a + bar*/}
       {fabstate === 0 ? (
+
         <View style={style.container}>
           <View style={{ borderWidth: 2, borderColor: 'black', flex: 10 }}>
+          <Transitioning.View
+      ref={ref}
+      transition={transition}
+      style={style.container}
+     >
             <FlatList
                 data={course}
                 keyExtractor={item => item.index}
@@ -71,17 +73,30 @@ const CreateCourse = () => {
                 return (
                     <TouchableOpacity
                         style={style.touchstyle}
+                        activeOpacity={0.9}
                         onPress={()=>{
                             console.log(item.index);
+                            ref.current.animateNextTransition();
+                            setCurrentIndex(item.index === currentIndex ? null : item.index);
+
                             }}
                         >
-                        <Text style={style.title}>
+                        {/*<Text style={style.title}>
                             {item.Cname}=={item.index}
-                        </Text>
+                        </Text>*/}
+                        <View style={style.card}>
+              <Text>{item.Cname}</Text>
+              {item.index === currentIndex && (
+                <View style={style.subCategoriesList}>
+                  <Text>{item.index}=={item.Cname}</Text>
+                </View>
+              )}
+            </View>
                     </TouchableOpacity>
                 );
                 }}
                 />
+                </Transitioning.View>
           </View>
           <View style={{borderWidth: 2, borderColor: 'black', flex: 2 }}>
             <FAB
@@ -154,6 +169,7 @@ const style = StyleSheet.create({
     paddingHorizontal: 25,
     flexDirection: 'row',
     alignItems: 'center',
+    flexGrow: 1,
   },
   title: {
     color: 'white',
@@ -170,6 +186,14 @@ const style = StyleSheet.create({
     position: 'absolute',
     margin: 16,
     right: 0,
+  },
+  card: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  subCategoriesList: {
+    marginTop: 20,
   },
 });
 
