@@ -1,9 +1,10 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React, { useState } from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {Provider as PaperProvider} from 'react-native-paper';
 // import type {Node} from 'react';
-import { StyleSheet, useColorScheme } from 'react-native';
+import {StyleSheet, useColorScheme} from 'react-native';
 import 'react-native-gesture-handler';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/HomeScreen';
 import Camera from './src/Camera';
 import ContactScreen from './src/ContactScreen';
@@ -17,34 +18,35 @@ import CreateCourse from './src/CreateCourse';
 import CourseScreen from './src/CourseScreen';
 
 import Test from './src/Test';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          {/*<Stack.Screen name="Login" component={LoginScreen} />
+    <PaperProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login">
+            {/*<Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="VOTP" component={VerifyOTP} />
           <Stack.Screen name="Signup" component={SignupScreen} />*/}
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Camera" component={Camera} />
-          <Stack.Screen name="Contacts" component={ContactScreen} />
-          <Stack.Screen name="Reminders" component={ReminderScreen} />
-          <Stack.Screen name="CreateCrs" component={CreateCourse} />
-          <Stack.Screen name="Course" component={CourseScreen} />
-          <Stack.Screen name="Test" component={Test} />
-          <Stack.Screen
-            name="Logs"
-            component={CallLogView}
-            initialParams={['a', 'b']}
-          />
-
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Camera" component={Camera} />
+            <Stack.Screen name="Contacts" component={ContactScreen} />
+            <Stack.Screen name="Reminders" component={ReminderScreen} />
+            <Stack.Screen name="CreateCrs" component={CreateCourse} />
+            <Stack.Screen name="Course" component={CourseScreen} />
+            <Stack.Screen name="Test" component={Test} />
+            <Stack.Screen
+              name="Logs"
+              component={CallLogView}
+              initialParams={['a', 'b']}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </PaperProvider>
   );
 };
 
