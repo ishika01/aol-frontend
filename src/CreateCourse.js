@@ -18,13 +18,17 @@ const transition = (
     <Transition.Out type="fade" durationMs={200} />
   </Transition.Together>
 );
-const CreateCourse = () => {
-  const [course, setCourse] = useState([]);
+const CreateCourse = ({navigation}) => {
+  const initialValue = [
+    {'Cadd': 'temp', 'Cid': 'temp', 'Cname': 'temp', 'index': 0},
+  ];
+  const [course, setCourse] = useState(initialValue);
   const [fabstate, setFabstate] = useState(0);
   const [index, setIndex] = useState(0);
   const [C_Name, setC_Name] = useState('');
   const [C_Id, setC_Id] = useState('');
   const [C_Add, setC_Add] = useState('');
+  const [adduser,setadduser] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(null);
   const ref = useRef();
@@ -75,11 +79,16 @@ const CreateCourse = () => {
                         </Text>*/}
                       <View style={style.card}>
                         <Text>{item.Cname}</Text>
+                        {/*this is how wr pass item object to a button prop */}
                         {item.index === currentIndex && (
                           <View style={style.subCategoriesList}>
                             <Text>
                               {item.index}=={item.Cname}
                             </Text>
+                            <Button
+                              title="open course"
+                              onPress={()=>{navigation.navigate('Course', { course_index:currentIndex });}}
+                            />
                           </View>
                         )}
                       </View>
