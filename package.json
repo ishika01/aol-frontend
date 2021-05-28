@@ -23,6 +23,7 @@
     "react": "17.0.1",
     "react-native": "0.64.0",
     "react-native-audio-record": "^0.2.2",
+    "react-native-bottom-drawer-view": "^1.0.2",
     "react-native-call-log": "^2.1.2",
     "react-native-camera": "^3.43.6",
     "react-native-contacts": "^7.0.0",

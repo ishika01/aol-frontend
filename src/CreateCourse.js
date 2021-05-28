@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef} from 'react';
 import {
   Text,
   View,
@@ -8,8 +8,8 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import { FAB, TextInput, Card } from 'react-native-paper';
-import { exp, Transition, Transitioning } from 'react-native-reanimated';
+import {FAB, TextInput, Card} from 'react-native-paper';
+import {exp, Transition, Transitioning} from 'react-native-reanimated';
 
 const transition = (
   <Transition.Together>
@@ -20,7 +20,7 @@ const transition = (
 );
 const CreateCourse = ({navigation}) => {
   const initialValue = [
-    {'Cadd': 'temp', 'Cid': 'temp', 'Cname': 'temp', 'index': 0},
+    {Cadd: 'Course_Add', Cid: 'Course_id', Cname: 'Course_name', index: 0},
   ];
   const [course, setCourse] = useState(initialValue);
   const [fabstate, setFabstate] = useState(0);
@@ -28,7 +28,7 @@ const CreateCourse = ({navigation}) => {
   const [C_Name, setC_Name] = useState('');
   const [C_Id, setC_Id] = useState('');
   const [C_Add, setC_Add] = useState('');
-  const [adduser,setadduser] = useState(false);
+  const [adduser, setadduser] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(null);
   const ref = useRef();
@@ -50,19 +50,19 @@ const CreateCourse = ({navigation}) => {
   //========================================================
   console.log(course);
   return (
-    <View style={{ borderWidth: 2, borderColor: 'black', flex: 10 }}>
+    <View style={{borderWidth: 2, borderColor: 'black', flex: 10}}>
       {/*add a + bar*/}
       {fabstate === 0 ? (
         <View style={style.container}>
-          <View style={{ borderWidth: 2, borderColor: 'black', flex: 10 }}>
+          <View style={{borderWidth: 2, borderColor: 'black', flex: 10}}>
             <Transitioning.View
               ref={ref}
               transition={transition}
               style={style.container}>
               <FlatList
                 data={course}
-                keyExtractor={(item) => item.index}
-                renderItem={({ item }) => {
+                keyExtractor={item => item.index}
+                renderItem={({item}) => {
                   return (
                     <TouchableOpacity
                       style={style.cardContainer}
@@ -71,7 +71,7 @@ const CreateCourse = ({navigation}) => {
                         console.log(item.index);
                         ref.current.animateNextTransition();
                         setCurrentIndex(
-                          item.index === currentIndex ? null : item.index
+                          item.index === currentIndex ? null : item.index,
                         );
                       }}>
                       {/*<Text style={style.title}>
@@ -82,12 +82,14 @@ const CreateCourse = ({navigation}) => {
                         {/*this is how wr pass item object to a button prop */}
                         {item.index === currentIndex && (
                           <View style={style.subCategoriesList}>
-                            <Text>
-                              {item.index}=={item.Cname}
-                            </Text>
+                            <Text>Course Index == {item.index}</Text>
                             <Button
                               title="open course"
-                              onPress={()=>{navigation.navigate('Course', { course_index:currentIndex });}}
+                              onPress={() => {
+                                navigation.navigate('Course', {
+                                  course_index: currentIndex,
+                                });
+                              }}
                             />
                           </View>
                         )}
@@ -98,7 +100,7 @@ const CreateCourse = ({navigation}) => {
               />
             </Transitioning.View>
           </View>
-          <View style={{ borderWidth: 2, borderColor: 'black', flex: 2 }}>
+          <View style={{borderWidth: 2, borderColor: 'black', flex: 2}}>
             <FAB style={style.fab} icon="plus" onPress={() => setFabstate(1)} />
           </View>
         </View>
@@ -107,7 +109,8 @@ const CreateCourse = ({navigation}) => {
         <View>
           {/** display a card with a submit button*/}
           <Text>Create New Course</Text>
-          <Card>
+          <Card style={{margin: 20}}>
+            <Text>assign start date and end date</Text>
             <TextInput
               label="Course Name"
               mode="outlined"

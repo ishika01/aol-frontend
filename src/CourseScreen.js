@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
 import {Button, TextInput, Paragraph, Dialog, Portal} from 'react-native-paper';
+import BottomDrawer from 'react-native-bottom-drawer-view';
+
 const CourseScreen = ({route, navigation}) => {
   //alter title here with course name
   navigation.setOptions({title: route.params.course_index});
@@ -8,7 +10,7 @@ const CourseScreen = ({route, navigation}) => {
   //for flatlist
   const [visibleNumlist, setVisibleNumList] = useState(false);
   const showNumlist = () => {
-      console.log(visibleNumlist);
+    console.log(visibleNumlist);
     if (visibleNumView === true) {
       setVisibleNumList(false);
     } else {
@@ -47,6 +49,13 @@ const CourseScreen = ({route, navigation}) => {
   };
 
   //=============================================================
+  const renderContent = () => {
+    return (
+      <View>
+        <Text>Get directions to your location</Text>
+      </View>
+    );
+  };
   console.log('UserList===>', UserList);
 
   return (
@@ -68,7 +77,7 @@ const CourseScreen = ({route, navigation}) => {
         {visibleNumView ? (
           <TextInput
             label="Contacts"
-            mode="outlined"
+            mode="focused"
             keyboardType="number-pad"
             value={UserContact}
             onChangeText={text => setUserContact(text)}
@@ -126,6 +135,16 @@ const CourseScreen = ({route, navigation}) => {
           }}
         />
       ) : null}
+      <BottomDrawer containerHeight={300} offset={49}>
+        <View>
+          <Text style={{margin:10,marginLeft:20}}>Create a new Question -</Text>
+          <TextInput
+            label="Enter A Question"
+            mode="outlined"
+          />
+
+        </View>
+      </BottomDrawer>
     </View>
   );
 };
