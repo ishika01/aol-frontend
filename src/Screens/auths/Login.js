@@ -11,10 +11,10 @@ const Login = ({ navigation }) => {
   //const [confirm, setConfirm] = useState(true);
   const [phoneNumber, addPhoneNumber] = useState('+91');
   const GetOTP = () => {
-    if (phoneNumber && phoneNumber.length > 12) {
+    if (phoneNumber && phoneNumber.length === 13) {
       navigation.navigate('VOTP', { phoneNumber });
     }
-    else { alert("Please enter 10 digit phone number"); }
+    else { alert('Please enter 10 digit phone number'); }
 
   };
   return (
@@ -48,7 +48,7 @@ const Login = ({ navigation }) => {
       </ThemeProvider>
     </View>
   );
-}
+};
 
 const style = StyleSheet.create({
 
@@ -57,14 +57,14 @@ const style = StyleSheet.create({
     borderRadius: 10,
     marginTop: 30,
     flex: 1,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
   btnContainer: {
     padding: 20,
     borderRadius: 10,
     marginTop: 30,
-    flexDirection: "row",
-    justifyContent: "space-between"
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   btnText: {
     color: 'black',
