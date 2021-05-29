@@ -9,7 +9,8 @@ import {
   Text,
   View,
   FlatList,
-  StatusBar
+  StatusBar,
+  TouchableOpacity
 } from 'react-native';
 import Contacts from 'react-native-contacts';
 import ListItemView from './component/ListItem'
@@ -18,6 +19,8 @@ const ContactScreen = function () {
     {
       name: '',
       index: 0,
+      isSelected:false,
+      statecon:'NO'
     },
   ];
   const [con, setContacts] = useState(initialValue);
@@ -30,15 +33,34 @@ const ContactScreen = function () {
     Contacts.getAll().then(contacts => {
       // contacts returned
       const modififiedContacts = contacts.map((item, index) => {
-        return { name: item.displayName, index: index };
+        const isSelected=false;
+        const statecon='No';
+        return { name: item.displayName, index: index, isSelected:isSelected, statecon:statecon };
       });
       setContacts(modififiedContacts);
     });
   }, []);
   //issue ==>> displays 1
   //console.log('=================================================');
-  //console.log(con);
-
+  const selectionHandler = (i)=>{
+    let arr=con.map((item)=>{
+      if(item.index===i.index){
+        if(item.isSelected===false){
+          item.isSelected=true;
+          item.statecon='YES';
+          return({...item});
+        }else{
+          item.isSelected=true;
+          item.statecon='NO';
+          return({...item});
+        }
+      }
+      return({...item});
+    })
+    setContacts(arr);
+    //console.log('con=> ',con);
+  }
+  
   return (
     <View style={style.container}>
       {/**uncomment the below code if you dont want to use flatlist */}
@@ -52,11 +74,17 @@ const ContactScreen = function () {
         keyExtractor={item => item.index}
         renderItem={({ item }) => {
           return (
-            <View style={style.item}>
+            <TouchableOpacity 
+            style={style.touchstyle}
+            onPress={()=>{
+              selectionHandler(item);
+              }}
+            >
               <Text style={style.title}>
                 {item.name}={item.index}
               </Text>
-            </View>
+              <Text style={style.title}>{item.statecon}</Text>
+            </TouchableOpacity>
           );
         }}
       />
@@ -65,6 +93,19 @@ const ContactScreen = function () {
 };
 
 const style = StyleSheet.create({
+  touchstyle:{
+    marginTop:'5%',
+    marginLeft:'10%',
+    marginRight:'10%',
+    height:50,
+    width:'80%',
+    borderRadius:4,
+    backgroundColor:'green',
+    justifyContent:'space-between',
+    paddingHorizontal:25,
+    flexDirection:'row',
+    alignItems:'center',
+  },
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
@@ -75,6 +116,7 @@ const style = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
+    color:'white',
     fontSize: 18,
   },
 });

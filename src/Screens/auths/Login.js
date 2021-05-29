@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { TextInput, View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { Button, ThemeProvider, Input } from 'react-native-elements';
+import { TextInput } from 'react-native-paper';
+import connectionApi from '../../api/connection';
+
 
 const Login = ({ navigation }) => {
   // If null, no SMS has been sent
@@ -10,46 +14,57 @@ const Login = ({ navigation }) => {
     if (phoneNumber && phoneNumber.length === 13) {
       navigation.navigate('VOTP', { phoneNumber });
     }
-    else { alert("Please enter 10 digit phone number"); }
+    else { alert('Please enter 10 digit phone number'); }
 
   };
   return (
-    <View>
-      <TextInput
-        style={style.display}
-        value={phoneNumber}
-        onChangeText={(text) => {
-          addPhoneNumber(text);
-        }}
-        keyboardType="number-pad"
-      />
-      <TouchableOpacity
-        style={style.btnContainer}
-        onPress={() => {
-          console.log(phoneNumber);
-          GetOTP();
-        }}
-      >
-        <Text style={style.btnText}>submit </Text>
-      </TouchableOpacity>
+    <View style={style.viewContainer}>
+      <ThemeProvider>
+        <TextInput
+          label="enter mobile number"
+          mode="outlined"
+          value={phoneNumber}
+          onChangeText={(text) => {
+            addPhoneNumber(text);
+          }}
+          keyboardType="number-pad"
+        />
+        <View style={style.btnContainer}>
+          <Button
+            title="     Get OTP !     "
+            onPress={() => {
+              console.log('works');
+              console.log(phoneNumber);
+              GetOTP();
+            }}
+          />
+          <Button
+            title="      Signup !      "
+            onPress={() => {
+              navigation.navigate('Signup');
+            }}
+          />
+        </View>
+      </ThemeProvider>
     </View>
   );
-}
+};
 
 const style = StyleSheet.create({
-  display: {
-    borderColor: 'black',
-    borderWidth: 2,
-    height: 50,
-    width: 300,
-    paddingLeft: 20,
-    backgroundColor: 'azure',
-    fontSize: 20,
+
+  viewContainer: {
+    padding: 20,
+    borderRadius: 10,
+    marginTop: 30,
+    flex: 1,
+    justifyContent: 'center',
   },
   btnContainer: {
     padding: 20,
     borderRadius: 10,
     marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   btnText: {
     color: 'black',

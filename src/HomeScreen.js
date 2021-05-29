@@ -159,7 +159,18 @@ export default function HomeScreen({ navigation }) {
             <Button
               style={styles.button}
               title="Contacts"
-              onPress={() => navigation.navigate("Contacts")}
+              onPress={() => navigation.navigate('Contacts')}
+            />
+            {/* add CreateCrs button*/}
+            <Button
+              style={styles.button}
+              title="Create Course"
+              onPress={() => navigation.navigate('CreateCrs')}
+            />
+            <Button
+              style={styles.button}
+              title="Test"
+              onPress={() => navigation.navigate('Test')}
             />
             {/* hide reminder button by checking if async storage has any dates or not*/}
             {/*change true with reminder visibility */}
@@ -167,7 +178,7 @@ export default function HomeScreen({ navigation }) {
               <Button
                 style={styles.button_Reminder}
                 title="Reminders"
-                onPress={() => navigation.navigate("Reminders")}
+                onPress={() => navigation.navigate('Reminders')}
               /> : null}
           </View>
         </View>
@@ -284,5 +295,5 @@ const styles = StyleSheet.create({
   },
   button_Reminder: {
 
-  }
+  },
 });
