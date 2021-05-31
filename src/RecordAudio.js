@@ -3,7 +3,7 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 import AudioRecord from 'react-native-audio-record';
 import {Buffer} from 'buffer';
 
-// AudioRecord.start();
+  // AudioRecord.start();
 export default function RecordAudio() {
   const [audioFiles, setAudioFiles] = useState([]);
   const [isRecording, setIsRecording] = useState(false);
@@ -26,7 +26,7 @@ export default function RecordAudio() {
          //console.log(data);
          //base64-encoded audio data chunks
       const chunk = Buffer.from(data, 'base64');
-      // console.log(chunk);
+       //console.log(chunk);
     });
   };
 

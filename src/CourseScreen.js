@@ -150,7 +150,7 @@ const CourseScreen = ({route, navigation}) => {
           onPress={() => navigation.navigate('Camera')}
           >C</Button>
           <Button style={style.roundButton} mode="contained"
-          onPress={() => console.log('Pressed')}
+          onPress={() => navigation.navigate('Audio')}
           >A</Button>
           </View>
           <View style={style.buttonViewContainer}>

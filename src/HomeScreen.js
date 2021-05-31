@@ -153,7 +153,7 @@ export default function HomeScreen({ navigation }) {
             <Button
               style={styles.button}
               title="Audio"
-              onPress={() => setSelectedFormat('AUDIO')}
+              onPress={() => navigation.navigate('Audio')}
             />
             {/* add contact button*/}
             <Button

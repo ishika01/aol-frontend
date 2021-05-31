@@ -16,7 +16,7 @@ import VerifyOTP from './src/Screens/auths/VerifyOTP';
 import SignupScreen from './src/Screens/auths/Signup';
 import CreateCourse from './src/CreateCourse';
 import CourseScreen from './src/CourseScreen';
-
+import RecordAudio from './src/RecordAudio';
 import Test from './src/Test';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -38,6 +38,7 @@ const App = () => {
             <Stack.Screen name="CreateCrs" component={CreateCourse} />
             <Stack.Screen name="Course" component={CourseScreen} />
             <Stack.Screen name="Test" component={Test} />
+            <Stack.Screen name="Audio" component={RecordAudio} />
             <Stack.Screen
               name="Logs"
               component={CallLogView}
