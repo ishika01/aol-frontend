@@ -22,7 +22,7 @@ export default function Camera(props) {
   const [client,setClient] = useState('');
 
   const setScreen =()=>{
-    if(props.route.params.client==="Signup"){
+    if(props.route.client === "Signup"){
       return("Signup");
     }
   }

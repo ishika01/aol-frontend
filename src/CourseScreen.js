@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {Text,View, StyleSheet, FlatList} from 'react-native';
 import {Button, TextInput, Paragraph, Dialog, Portal} from 'react-native-paper';
 import BottomDrawer from 'react-native-bottom-drawer-view';
 
@@ -141,10 +141,31 @@ const CourseScreen = ({route, navigation}) => {
           <TextInput
             label="Enter A Question"
             mode="outlined"
-          />
-
-        </View>
+          /> 
+          <View style={style.buttonViewContainer}>
+          <Button style={style.roundButton}mode="contained"
+          onPress={() => console.log('Pressed')}
+          >T</Button>
+          <Button style={style.roundButton}mode="contained"
+          onPress={() => navigation.navigate('Camera')}
+          >C</Button>
+          <Button style={style.roundButton} mode="contained"
+          onPress={() => console.log('Pressed')}
+          >A</Button>
+          </View>
+          <View style={style.buttonViewContainer}>
+          <Button
+          mode="contained"
+          onPress={() => console.log('Pressed')}>
+          Submit
+          </Button>
+           </View>
+          </View>
+        
+     
       </BottomDrawer>
+      
+
     </View>
   );
 };
@@ -154,6 +175,26 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
+  button: {
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderRadius: 4,
+    alignSelf: 'flex-start',
+    marginHorizontal: '1%',
+    marginBottom: 6,
+    minWidth: '48%',
+    textAlign: 'center',
+  },
+  roundButton: {
+    width: 70,
+    height: 70,
+    justifyContent: 'center',
+    alignSelf: 'flex-start',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 100,
+    backgroundColor: '#90EE90',
+  }
 });
 
 export default CourseScreen;

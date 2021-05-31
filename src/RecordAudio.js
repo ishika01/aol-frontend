@@ -23,8 +23,8 @@ export default function RecordAudio() {
     setAudioFiles([...audioFiles, audioFile]);
     console.log(audioFiles.length);
     AudioRecord.on('data', data => {
-      // console.log(data);
-      // base64-encoded audio data chunks
+         //console.log(data);
+         //base64-encoded audio data chunks
       const chunk = Buffer.from(data, 'base64');
       // console.log(chunk);
     });
